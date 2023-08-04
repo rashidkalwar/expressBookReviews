@@ -72,4 +72,22 @@ public_users.get('/review/:isbn', function (req, res) {
   return res.status(200).send(JSON.stringify(reviews));
 });
 
+const connectToURL = (url) => {
+  const req = axios.get(url);
+  console.log(req);
+  req
+    .then((resp) => {
+      let listOfWork = resp.data.work;
+      listOfWork.forEach((work) => {
+        console.log(work.titleAuth);
+      });
+    })
+    .catch((err) => {
+      console.log(err.toString());
+    });
+};
+console.log('Before connect URL');
+connectToURL('/isbn/:isbn');
+console.log('After connect URL');
+
 module.exports.general = public_users;
